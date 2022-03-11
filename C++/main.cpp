@@ -25,6 +25,7 @@ int main(int argc, char const *argv[])
 
     vector<Question> questions;
 
+    //Reading the questions
     while(!input_file.eof()){
         string question_content, answer;
         string options[4];
@@ -47,6 +48,7 @@ int main(int argc, char const *argv[])
     int random_question_index;
     int question_number = 0;
     
+    //Asking questions in random order
     while(questions.size() != 0){
         random_question_index = rand() % questions.size();
         //Set iterator to start
@@ -55,13 +57,14 @@ int main(int argc, char const *argv[])
 
         int user_answer = print_question(questions[random_question_index], question_number);
 
+        //If the answer is wrong, the question will be repeated until a correct answer is given
         while(!questions[random_question_index].validate_answer(user_answer)){
             cout << '\n' << "Wrong! Try again." << '\n' << endl;
             user_answer = print_question(questions[random_question_index], question_number);
         }
             
         cout << '\n' << "Correct!" << '\n' << endl;
-        //cout << *ptr << endl;
+
         questions.erase(ptr);
     }
     cout << "End of Quiz" << endl;
